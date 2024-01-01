@@ -1,5 +1,7 @@
 <h1>List of Animals</h1>
 
+<a href="/animal/new"><button>CREATE LIFE</button></a>
+
 <% animals.forEach((animal, index) => { %>
 
     <a href="/animal/<%= animal._id %>"><h2><%= animal.species %></h2></a>

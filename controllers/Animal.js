@@ -14,7 +14,7 @@ function errorHandler(error, res){
 
 //SEED Route
 router.get("/seed", async (req, res) => {
-    await Animal.remove({}).catch((error) => errorHandler(error, res))
+    await Animal.deleteMany({})
     const animals = await Animal.create([
         {species: "Blue Whale", extinct: false, location: "Ocean", lifeExpectancy: 85},
         {species: "Green Sea Turtle", extinct: false, location: "Subtropical Oceans", lifeExpectancy: 75},
@@ -42,8 +42,8 @@ router.get("/new", (req, res) => {
 //CREATE route - POST - Creates an animal
 router.post("/", async (req, res) => {
 
-    //make sure readyToExist is true or false
-    req.body.readyToExist = Boolean(req.body.readyToExist)
+    //make sure extinct is true or false
+    req.body.extinct = Boolean(req.body.extinct)
 
     //Create the animal    
     await Animal.create(req.body).catch((error) => errorHandler(error, res))
