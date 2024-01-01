@@ -37,11 +37,21 @@ router.get("/new", (req, res) => {
 
 //DESTROY route - DELETE - Deletes one animal
 router.delete("/:id", async (req, res) => {
-    await Animal.findByIdAndDelete(req.params.id)
+    await Animal.findByIdAndDelete(req.params.id).catch((error) => errorHandler(error, res))
     res.redirect("/animal")
 })
 
 //UPDATE route - PUT - Updates one animal
+router.put("/:id", async (req, res) => {
+    //make sure extinct is true or false
+    req.body.extinct = Boolean(req.body.extinct)
+
+    //update animal
+    await Animal.findByIdAndUpdate(req.params.id, req.body)
+
+    //redirect to index
+    res.redirect("/animal")
+})
 
 //CREATE route - POST - Creates an animal
 router.post("/", async (req, res) => {
@@ -57,10 +67,14 @@ router.post("/", async (req, res) => {
 })
 
 //EDIT route - GET - Get the edit form
+router.get("/:id/edit", async (req, res) => {
+    const animal = await Animal.findById(req.params.id).catch((error) => errorHandler(error, res))
+    res.render("animal/edit.ejs", {animal})
+})
 
 //SHOW route - GET - Gets one animal
 router.get("/:id", async (req, res) => {
-    const animal = await Animal.findById(req.params.id)
+    const animal = await Animal.findById(req.params.id).catch((error) => errorHandler(error, res))
     res.render("animal/show.ejs", {animal})
 })
 
