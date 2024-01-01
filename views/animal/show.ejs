@@ -6,4 +6,8 @@
 
 <h4>LIFE EXPECTANCY: <%= animal.lifeExpectancy %></h4>
 
+<form action="/animal/<%= animal._id %>?_method=DELETE" method="post">
+    <input type="submit" value="delete">
+</form>
+
 <a href="/animal"><h5>BACK TO ANIMALS HOME</h5></a>

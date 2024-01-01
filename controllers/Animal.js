@@ -36,6 +36,10 @@ router.get("/new", (req, res) => {
 })
 
 //DESTROY route - DELETE - Deletes one animal
+router.delete("/:id", async (req, res) => {
+    await Animal.findByIdAndDelete(req.params.id)
+    res.redirect("/animal")
+})
 
 //UPDATE route - PUT - Updates one animal
 
