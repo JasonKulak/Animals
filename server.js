@@ -5,7 +5,7 @@ require("dotenv").config({})
 const express = require("express")
 const morgan = require("morgan")
 const methodOverride = require("method-override")
-
+const AnimalRouter = require("./controllers/Animal")
 
 
 //********************
@@ -30,6 +30,8 @@ app.use("/static", express.static("public"))
 app.get("/", (req, res) => {
     res.send("Animals are running wild!!!")
 })
+
+app.use("/animal", AnimalRouter)
 
 
 
